@@ -5,7 +5,7 @@ function App() {
 
 
   const [products, setProducts] = useState([]);
-  const [search , setSearch] = useState("");
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const ShowData = async () => {
@@ -28,28 +28,34 @@ function App() {
 
   return (
     <div className="Main-content">
-    <input className="mt-6 mb-6" type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
-    {implementSearch.map((product, index) => (
-      <div key={index}>
-        <div className="mb-6 max-w-sm rounded overflow-hidden shadow-lg">
-          <img className="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains" />
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2">{product.name}</div>
-            <p className="text-gray-700 text-base">
-              {product.description}
-            </p>
-          </div>
-          <div className="px-6 pt-4 pb-2">
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{product.gradingtype}</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{product.thickness}</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{product.price}</span>
-            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">{product.rating}</span>
+      <input className="mt-6 mb-6 " type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
+      <div className="bg-white">
+        <div className="max-w-2xl mx-auto py-16 px-4 sm:py-24 sm:px-6 lg:max-w-7xl lg:px-8">
+          <h2 className="sr-only">Products</h2>
+
+          <div className=" grid grid-cols-1 gap-y-10 sm:grid-cols-2 gap-x-6 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
+            {implementSearch.map((product) => (
+              <div className="rounded overflow-hidden shadow-lg">
+                <a key={product.id} href="" className="group">
+                  <div className="w-full aspect-w-1 aspect-h-1 bg-gray-200 rounded-lg overflow-hidden xl:aspect-w-7 xl:aspect-h-8">
+                    <img
+                      src={product.image}
+                      alt={product.image}
+                      className="w-full h-full object-center object-cover group-hover:opacity-75"
+                    />
+                  </div>
+                  <p className="p-2 mt-1 text-lg font-medium text-gray-900">{product.name}</p>
+                  <h3 className="p-2 mt-4 text-sm text-gray-700">{product.description}</h3>
+                  <p className="p-2 mt-1 text-lg font-medium text-gray-900">{product.gradingtype}</p>
+                  <p className="p-2 mt-1 text-lg font-medium text-gray-900">{product.price}</p>
+                </a>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-    ))}
 
-    </div>
+    </div >
   );
 }
 

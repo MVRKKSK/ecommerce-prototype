@@ -4,3 +4,7 @@
     align-items: center;
     flex-direction: column;
 }
+.inputsytle{
+    padding: 6px !important;
+    border-radius: 2px solid green !important;
+}
