@@ -5,13 +5,14 @@ function App() {
 
 
   const [products, setProducts] = useState([]);
+  const [search , setSearch] = useState("");
 
   useEffect(() => {
     const ShowData = async () => {
       try {
         const res = await axios.get("/products");
-/*         const result = res.data.filter(product => product.gradingtype === "green ply" || product.gradingtype === "mayur ply");
-        setProducts(result); */
+        const result = res.data.filter(product => product.gradingtype === "green ply" || product.gradingtype === "red ply");
+        setProducts(result);
         setProducts(res.data);
       }
       catch (err) {
@@ -21,12 +22,16 @@ function App() {
     ShowData();
   }, [])
 
-  
+  const implementSearch = products.filter(product => { return product.name.toLowerCase().includes(search.toLowerCase()) })
+
+
 
   return (
-    <>{products.map((product, index) => (
-      <div key = {index}>
-        <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    <div className="Main-content">
+    <input className="mt-6 mb-6" type="text" placeholder="search" onChange={e => setSearch(e.target.value)} />
+    {implementSearch.map((product, index) => (
+      <div key={index}>
+        <div className="mb-6 max-w-sm rounded overflow-hidden shadow-lg">
           <img className="w-full" src="https://v1.tailwindcss.com/img/card-top.jpg" alt="Sunset in the mountains" />
           <div className="px-6 py-4">
             <div className="font-bold text-xl mb-2">{product.name}</div>
@@ -44,7 +49,7 @@ function App() {
       </div>
     ))}
 
-    </>
+    </div>
   );
 }
 
