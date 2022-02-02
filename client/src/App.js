@@ -36,6 +36,8 @@ function App() {
     filterData(value);
   };
 
+  const notincluded = ["description"]
+
   // filter records by search text
   const filterData = (value) => {
     const lowercasedValue = value.toLowerCase().trim();
@@ -43,7 +45,7 @@ function App() {
     else {
       const filteredData = products.filter(item => {
         return Object.keys(item).some(key =>
-          item[key].toString().toLowerCase().includes(lowercasedValue)
+          notincluded.includes(key) ? false : item[key].toString().toLowerCase().includes(lowercasedValue)
         );
       });
       setProducts(filteredData);
